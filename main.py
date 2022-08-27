@@ -33,8 +33,7 @@ def botSetup():
 
 @bot.event
 async def on_ready():
-    print(f'Logged in as {bot.user} (ID: {bot.user.id})')
-    print('------')
+    print(f'{bot.user} O')
 
 
 @bot.command()
