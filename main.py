@@ -35,7 +35,9 @@ def botSetup():
 async def on_ready():
     print(f'{bot.user} O')
 
-
+@bot.command()
+async def ping(ctx, message):
+    await ctx.send("PONG!!")
 @bot.command()
 async def say(ctx, *, message):
     autor = ctx.message.author.name
