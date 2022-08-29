@@ -7,8 +7,8 @@ class Start(commands.Cog):
      
     @commands.Cog.listener() 
     async def on_ready(self):
-        #await self.bot.change_presence(activity = discord.Streaming(name = "Nuestra Señora de Paris", url = "https://www.twitch.tv/robtop"))
-        return print(f'O')
+        await self.bot.change_presence(activity = discord.Streaming(name = "Nuestra Señora de Paris", url = "https://www.twitch.tv"))
+        return print(f'Bot is running')
         
     @commands.command()
     async def ping(self, ctx):
