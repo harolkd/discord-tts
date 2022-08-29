@@ -1,13 +1,15 @@
-import discord, asyncio, os
+import discord, asyncio, os, json
 from discord.ext import commands
 from dotenv import load_dotenv
 
 intents = discord.Intents.default()
+data = json.load(open('config.json'))
+
 intents.members = True
 intents.message_content = True
 load_dotenv()
 
-bot = commands.Bot(command_prefix="'", description="Discord tts bot core", intents=intents)
+bot = commands.Bot(command_prefix=data['prefix'], description=data['description'], intents=intents)
 
 async def load_extensions():
     for filename in os.listdir("./cogs"):
@@ -16,7 +18,6 @@ async def load_extensions():
 
 async def main():
     await load_extensions()
-    await asyncio.sleep(1)
     return
     
 asyncio.run(main())
