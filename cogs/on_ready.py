@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class Start(commands.Cog):
+class Starter(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
      
@@ -10,9 +10,5 @@ class Start(commands.Cog):
         await self.bot.change_presence(activity = discord.Streaming(name = "Nuestra Señora de Paris", url = "https://www.twitch.tv"))
         return print(f'Bot is running')
         
-    @commands.command()
-    async def ping(self, ctx):
-        await ctx.send("PONG AND PONG!!")
-        
 async def setup(bot):
-    await bot.add_cog(Start(bot))
+    await bot.add_cog(Starter(bot))
