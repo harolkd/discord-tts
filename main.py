@@ -84,5 +84,31 @@ async def say(ctx, *, message):
     else:
         await ctx.send("Debes estar en un canal")
         
+@bot.command(pass_context = True)
+async def join(ctx):
+    if(ctx.author.voice):
+        channel = ctx.author.voice.channel
+        #conditions to make possible connect.
+        if(channel == ctx.voice_client):
+            pass
+        elif(ctx.voice_client is None):
+            await channel.connect()
+        else:
+            await ctx.voice_client.move_to(channel)
+    else:
+        await ctx.send("Debes estar en un canal de voz")
+
+@bot.command(pass_context = True)
+async def leave(ctx):
+    if(ctx.author.voice):
+        channel = ctx.author.voice.channel
+        await ctx.voice_client.disconnect()
+    else:
+        await ctx.send("Debes estar en un canal de voz")
+
+@bot.command()
+async def ping(ctx):
+    await ctx.send("Pong!!")
+        
 setupFiles()
 bot.run(os.getenv('TOKEN'))
