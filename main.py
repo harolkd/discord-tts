@@ -105,10 +105,6 @@ async def leave(ctx):
         await ctx.voice_client.disconnect()
     else:
         await ctx.send("Debes estar en un canal de voz")
-
-@bot.command()
-async def ping(ctx):
-    await ctx.send("Pong!!")
         
 setupFiles()
 bot.run(os.getenv('TOKEN'))
