@@ -27,6 +27,17 @@ class Commander(commands.Cog):
                 pass
         else:
             ctx.send("Tienes que estar en un canal de voz")
+            
+    @commands.command()
+    async def leave(self, ctx):
+        channel = ctx.author.voice.channel
+        if self.vc[id] != None:
+            try:
+                await self.disconnect()
+            except:
+                pass
+        else:
+            ctx.send("Tienes que estar en un canal de voz")
         
 async def setup(bot):
     await bot.add_cog(Commander(bot))
