@@ -17,6 +17,8 @@ bot = commands.Bot(command_prefix=config['prefix'], description=config['descript
 
 @bot.event
 async def on_ready():
+    activity = discord.Streaming(name=config['activity_name'], url=config['url'])
+    await bot.change_presence(activity=activity)
     print(f'{bot.user} O')
 
 @bot.command()
