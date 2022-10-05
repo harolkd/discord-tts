@@ -4,12 +4,12 @@ from dotenv import load_dotenv
 from functions import setupFiles
 
 intents = discord.Intents.default()
-data = json.load(open('config.json'))
+config = json.load(open('config.json'))
 
 intents.members = True
 intents.message_content = True
 
-bot = commands.Bot(command_prefix=data['prefix'], description=data['description'], intents=intents)
+bot = commands.Bot(command_prefix=config['prefix'], description=config['description'], intents=intents)
 
 async def load_extensions():
     for filename in os.listdir("./cogs"):
