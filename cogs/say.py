@@ -43,11 +43,7 @@ class Speaker(commands.Cog):
             message = "%s dice. %s" % (autor, message)
         #new message
         print(message)
-        #brasilian voice
-        if "ç" in message:
-            speech = gTTS(text = message, lang = config['language'], slow = False)
-        else:
-            speech = gTTS(text = message, lang = config['language'], slow = False)
+        speech = gTTS(text = message, lang = config['language'], slow = False)
         #create audio
         speech.save("./files/audio.mp3")
         print("created file")
