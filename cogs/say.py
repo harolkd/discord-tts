@@ -3,11 +3,12 @@ from discord.ext import commands
 from discord import FFmpegPCMAudio
 from functions import checkData
 from gtts import gTTS
+config = json.load(open('config.json'))
 
 class Speaker(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-     
+
     @commands.command()
     async def say(ctx, arg):
         autor = ctx.message.author.name
@@ -18,23 +19,23 @@ class Speaker(commands.Cog):
         else:
             if (ctx.voice_client.is_playing()):
                 await ctx.send("espera a que termine de hablar")
-    
+
         txt = open('files/data.txt', 'r+')
         data = txt.read()
         txt.close
-    
+
         if data == "Nobody":
-            checkData(message, autor, server)    
+            checkData(message, autor, server)
         elif data == autor:
             autor = "()"
             if "()" in message:
-                checkData(message, autor, server)        
+                checkData(message, autor, server)
         elif data != autor:
             checkData(message, autor, server)
-    
+
         if message == None:
             message = "Hola, me llamo super alexia"
-    
+
         #anonimous message
         if ("()" in message) or ("()" in autor):
             pass
@@ -44,9 +45,9 @@ class Speaker(commands.Cog):
         print(message)
         #brasilian voice
         if "ç" in message:
-            speech = gTTS(text = message, lang = "pt", slow = False)
+            speech = gTTS(text = message, lang = config['language'], slow = False)
         else:
-            speech = gTTS(text = message, lang = "es", slow = False)
+            speech = gTTS(text = message, lang = config['language'], slow = False)
         #create audio
         speech.save("./files/audio.mp3")
         print("created file")
@@ -68,6 +69,6 @@ class Speaker(commands.Cog):
                 print("playing audio")
         else:
             await ctx.send("Debes estar en un canal")
-        
+
 async def setup(bot):
     await bot.add_cog(Speaker(bot))
