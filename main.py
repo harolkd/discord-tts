@@ -24,7 +24,7 @@ async def on_ready():
 @bot.command()
 async def ping(ctx, message):
     await ctx.send("PONG!!")
-    
+
 @bot.command()
 async def say(ctx, *, message):
     autor = ctx.message.author.name
@@ -35,38 +35,35 @@ async def say(ctx, *, message):
     else:
         if (ctx.voice_client.is_playing()):
             await ctx.send("espera a que termine de hablar")
-            
+
+    if "@" in message:
+        await ctx.send("No me hagas mencionar a usuarios, por favor")
+        return
+
     txt = open('files/data.txt', 'r+')
     data = txt.read()
     txt.close
-    
+
     if data == "Nobody":
-        checkData(message, autor, server)    
+        checkData(message, autor, server)
     elif data == autor:
         autor = "()"
         if "()" in message:
-            checkData(message, autor, server)        
+            checkData(message, autor, server)
     elif data != autor:
         checkData(message, autor, server)
-        
-    if message == None:
-        message = "Hola, me llamo super alexia"
-    
+
     #anonimous message
+    if "@" in message:
+        await ctx.send("No me hagas mencionar a usuarios, por favor")
+
     if ("()" in message) or ("()" in autor):
         pass
     else:
         message = "%s dice. %s" % (autor, message)
-    #new message
-    print(message)
-    #brasilian voice
-    if "ç" in message:
-        speech = gTTS(text = message, lang = "pt", slow = False)
-    else:
-        speech = gTTS(text = message, lang = "es", slow = False)
-    #create audio
+
+    speech = gTTS(text = message, lang = "es", slow = False)
     speech.save("./files/audio.mp3")
-    print("created file")
     #check voice channel
     if(ctx.author.voice):
         channel = ctx.author.voice.channel
@@ -77,15 +74,10 @@ async def say(ctx, *, message):
             await channel.connect()
         else:
             await ctx.voice_client.move_to(channel)
-        #voice = await channel.connect()
-        if "@" in message:
-            await ctx.send("No me hagas mencionar a usuarios, por favor")
-        else:
-            ctx.voice_client.play(FFmpegPCMAudio("./files/audio.mp3"))
-            print("playing audio")
+        ctx.voice_client.play(FFmpegPCMAudio("./files/audio.mp3"))
     else:
         await ctx.send("Debes estar en un canal")
-        
+
 @bot.command(pass_context = True)
 async def join(ctx):
     if(ctx.author.voice):
@@ -107,6 +99,6 @@ async def leave(ctx):
         await ctx.voice_client.disconnect()
     else:
         await ctx.send("Debes estar en un canal de voz")
-        
+
 setupFiles()
 bot.run(os.getenv('TOKEN'))
