@@ -41,13 +41,10 @@ class Speaker(commands.Cog):
             pass
         else:
             message = "%s dice. %s" % (autor, message)
-        #new message
-        print(message)
+
         speech = gTTS(text = message, lang = config['language'], slow = False)
-        #create audio
         speech.save("./files/audio.mp3")
-        print("created file")
-        #check voice channel
+
         if(ctx.author.voice):
             channel = ctx.author.voice.channel
             #condiciones
