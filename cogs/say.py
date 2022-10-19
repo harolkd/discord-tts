@@ -1,4 +1,4 @@
-import discord
+import discord, json
 from discord.ext import commands
 from discord import FFmpegPCMAudio
 from functions import checkData
@@ -13,12 +13,11 @@ class Speaker(commands.Cog):
     async def say(ctx, arg):
         autor = ctx.message.author.name
         message = arg
+        if message == None:
+            message = "Hola, me llamo super alexia"
         #check if bot is talking
-        if ctx.voice_client is None:
-            pass
-        else:
-            if (ctx.voice_client.is_playing()):
-                await ctx.send("espera a que termine de hablar")
+        if (ctx.voice_client is not None) and (ctx.voice_client.is_playing()):
+            return await ctx.send("Espera a que termine de hablar")
 
         txt = open('files/data.txt', 'r+')
         data = txt.read()
@@ -33,14 +32,12 @@ class Speaker(commands.Cog):
         elif data != autor:
             checkData(message, autor, server)
 
-        if message == None:
-            message = "Hola, me llamo super alexia"
-
         #anonimous message
-        if ("()" in message) or ("()" in autor):
-            pass
-        else:
+        if ("()" not in message) or ("()" in autor):
             message = "%s dice. %s" % (autor, message)
+
+        if "@" in message:
+            return await ctx.send("No me hagas mencionar a usuarios, por favor")
 
         speech = gTTS(text = message, lang = config['language'], slow = False)
         speech.save("./files/audio.mp3")
@@ -54,14 +51,10 @@ class Speaker(commands.Cog):
                 await channel.connect()
             else:
                 await ctx.voice_client.move_to(channel)
-            #voice = await channel.connect()
-            if "@" in message:
-                await ctx.send("No me hagas mencionar a usuarios, por favor")
-            else:
-                ctx.voice_client.play(FFmpegPCMAudio("./files/audio.mp3"))
-                print("playing audio")
+
+            return ctx.voice_client.play(FFmpegPCMAudio("./files/audio.mp3"))
         else:
-            await ctx.send("Debes estar en un canal")
+            return await ctx.send("Debes estar en un canal")
 
 async def setup(bot):
     await bot.add_cog(Speaker(bot))
