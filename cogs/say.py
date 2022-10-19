@@ -10,11 +10,9 @@ class Speaker(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def say(ctx, arg):
-        autor = ctx.message.author.name
-        message = arg
-        if message == None:
-            message = "Hola, me llamo super alexia"
+    async def say(self, ctx, arg):
+        autor = ctx.author.name
+        server = ctx.guild.id
         #check if bot is talking
         if (ctx.voice_client is not None) and (ctx.voice_client.is_playing()):
             return await ctx.send("Espera a que termine de hablar")
@@ -24,22 +22,22 @@ class Speaker(commands.Cog):
         txt.close
 
         if data == "Nobody":
-            checkData(message, autor, server)
+            checkData(arg, autor, server)
         elif data == autor:
             autor = "()"
-            if "()" in message:
-                checkData(message, autor, server)
+            if "()" in arg:
+                checkData(arg, autor, server)
         elif data != autor:
-            checkData(message, autor, server)
+            checkData(arg, autor, server)
 
         #anonimous message
-        if ("()" not in message) or ("()" in autor):
-            message = "%s dice. %s" % (autor, message)
+        if ("()" not in arg) or ("()" in autor):
+            arg = "%s dice. %s" % (autor, arg)
 
-        if "@" in message:
+        if "@" in arg:
             return await ctx.send("No me hagas mencionar a usuarios, por favor")
 
-        speech = gTTS(text = message, lang = config['language'], slow = False)
+        speech = gTTS(text = arg, lang = config['language'], slow = False)
         speech.save("./files/audio.mp3")
 
         if(ctx.author.voice):
