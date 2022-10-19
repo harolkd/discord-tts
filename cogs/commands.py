@@ -5,7 +5,7 @@ class Commander(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.vc = {}
-        
+
     @commands.command()
     async def join_VC(self, ctx, channel):
         id = int(ctx.guild.id)
@@ -16,7 +16,7 @@ class Commander(commands.Cog):
                 return
         else:
             self.vc[id].move_to(channel)
-        
+
     @commands.command()
     async def join(self, ctx):
         channel = ctx.author.voice.channel
@@ -27,7 +27,7 @@ class Commander(commands.Cog):
                 pass
         else:
             ctx.send("Tienes que estar en un canal de voz")
-            
+
     @commands.command()
     async def leave(self, ctx):
         channel = ctx.author.voice.channel
@@ -38,6 +38,11 @@ class Commander(commands.Cog):
                 pass
         else:
             ctx.send("Tienes que estar en un canal de voz")
-        
+
+    @commands.command()
+    async def foo(self, ctx, arg):
+
+        await ctx.send(message)
+
 async def setup(bot):
     await bot.add_cog(Commander(bot))
