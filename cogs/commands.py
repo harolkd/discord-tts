@@ -31,7 +31,7 @@ class Commander(commands.Cog):
     @commands.command()
     async def leave(self, ctx):
         channel = ctx.author.voice.channel
-        if self.vc[id] != None:
+        if channel != None:
             try:
                 await self.disconnect()
             except:
