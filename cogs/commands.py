@@ -41,15 +41,17 @@ class Commander(commands.Cog):
 
     @commands.command()
     async def foo(self, ctx):
+        server = ctx.guild.id
         channel = ctx.guild.me.voice.channel
         members = self.bot.get_channel(channel.id).members
-        voice_client = ctx.guild.voice_client
 
         while True:
             time.sleep(3)
             members = self.bot.get_channel(channel.id).members
             if len(members) < 5:
-                await voice_client.disconnect()
+                await ctx.invoke(self.bot.get_command('leave'))
+                break
+        return
 
 async def setup(bot):
     await bot.add_cog(Commander(bot))
