@@ -33,7 +33,7 @@ class Commander(commands.Cog):
         channel = ctx.author.voice.channel
         if channel != None:
             try:
-                await self.disconnect()
+                await ctx.voice_client.disconnect()
             except:
                 pass
         else:
@@ -45,12 +45,12 @@ class Commander(commands.Cog):
         channel = ctx.guild.me.voice.channel
         members = self.bot.get_channel(channel.id).members
 
-        while True:
-            time.sleep(3)
-            members = self.bot.get_channel(channel.id).members
-            if len(members) < 5:
-                await ctx.invoke(self.bot.get_command('leave'))
-                break
+        #while True:
+        #    i = self.bot.get_channel(channel.id).members
+        #    if len(i) < 2:
+        #        await ctx.voice_client.disconnect()
+        #        break
+        #    print("sleep")
         return
 
 async def setup(bot):
