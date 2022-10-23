@@ -8,6 +8,7 @@ config = json.load(open('config.json'))
 
 intents.members = True
 intents.message_content = True
+intents.voice_states = True
 
 bot = commands.Bot(command_prefix=config['prefix'], description=config['description'], intents=intents)
 
@@ -19,7 +20,7 @@ async def load_extensions():
 async def main():
     await load_extensions()
     return
-    
+
 if __name__ == "__main__":
     load_dotenv()
     setupFiles()
