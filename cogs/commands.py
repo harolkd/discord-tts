@@ -9,29 +9,20 @@ def updateI(self, ctx):
 class Commander(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.vc = {}
-
-    @commands.command()
-    async def join_VC(self, ctx, channel):
-        id = int(ctx.guild.id)
-        if self.vc[id] == None or not self.vc[id].is_connected():
-            self.vc[id] = await channel.connect()
-            if self.vc[id] == None:
-                ctx.send("Lo siento, error problemático")
-                return
-        else:
-            self.vc[id].move_to(channel)
 
     @commands.command()
     async def join(self, ctx):
-        channel = ctx.author.voice.channel
-        if ctx.author.voice:
-            try:
-                await self.join_VC(ctx, channel)
-            except:
+        if(ctx.author.voice):
+            channel = ctx.author.voice.channel
+            if channel == ctx.voice_client:
                 pass
+            elif ctx.voice_client is None:
+                await channel.connect()
+            else:
+                await ctx.voice_client.move_to(channel)
+            return
         else:
-            ctx.send("Tienes que estar en un canal de voz")
+            return await ctx.send("Debes estar en un canal")
 
     @commands.command()
     async def leave(self, ctx):
