@@ -1,9 +1,9 @@
-import discord, json
+import discord
 from discord.ext import commands
 from discord import FFmpegPCMAudio
 from functions import checkData
 from gtts import gTTS
-config = json.load(open('config.json'))
+from main import config
 
 class Speaker(commands.Cog):
     def __init__(self, bot):
