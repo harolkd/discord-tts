@@ -11,7 +11,7 @@ class Speaker(commands.Cog):
 
     @commands.command()
     async def say(self, ctx, arg):
-        autor = ctx.author.name
+        author = ctx.author.name
         server = ctx.guild.id
         #check if bot is talking
         if (ctx.voice_client is not None) and (ctx.voice_client.is_playing()):
@@ -22,17 +22,17 @@ class Speaker(commands.Cog):
         txt.close
 
         if data == "Nobody":
-            checkData(arg, autor, server)
-        elif data == autor:
-            autor = "()"
+            checkData(arg, author, server)
+        elif data == author:
+            author = "()"
             if "()" in arg:
-                checkData(arg, autor, server)
-        elif data != autor:
-            checkData(arg, autor, server)
+                checkData(arg, author, server)
+        elif data != author:
+            checkData(arg, author, server)
 
         #anonimous message
-        if ("()" not in arg) or ("()" in autor):
-            arg = "%s dice. %s" % (autor, arg)
+        if ("()" not in arg) or ("()" in author):
+            arg = "%s dice. %s" % (author, arg)
 
         if "@" in arg:
             return await ctx.send("No me hagas mencionar a usuarios, por favor")
@@ -40,19 +40,8 @@ class Speaker(commands.Cog):
         speech = gTTS(text = arg, lang = config['language'], slow = False)
         speech.save("./files/audio.mp3")
 
-        if(ctx.author.voice):
-            channel = ctx.author.voice.channel
-            #condiciones
-            if channel == ctx.voice_client:
-                pass
-            elif ctx.voice_client is None:
-                await channel.connect()
-            else:
-                await ctx.voice_client.move_to(channel)
-
-            return ctx.voice_client.play(FFmpegPCMAudio("./files/audio.mp3"))
-        else:
-            return await ctx.send("Debes estar en un canal")
+        await ctx.invoke(self.bot.get_command('join'))
+        return ctx.voice_client.play(FFmpegPCMAudio("./files/audio.mp3"))
 
 async def setup(bot):
     await bot.add_cog(Speaker(bot))
