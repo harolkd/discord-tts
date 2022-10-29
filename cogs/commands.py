@@ -1,11 +1,6 @@
 import discord, time
 from discord.ext import commands
 
-def updateI(self, ctx):
-    channel = ctx.guild.me.voice.channel
-    i = self.bot.get_channel(channel.id).members
-    return print(len(i))
-
 class Commander(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -36,14 +31,14 @@ class Commander(commands.Cog):
             ctx.send("Tienes que estar en un canal de voz")
         return
 
-    @commands.command()
-    async def foo(self, ctx):
-        server = ctx.guild.id
-        channel = ctx.guild.me.voice.channel
-        members = self.bot.get_channel(channel.id).members
-        voice_channel = ctx.guild.me.voice.channel
-        print(channel.id)
-        return
+    #@commands.command()
+    #async def foo(self, ctx):
+    #    server = ctx.guild.id
+    #    channel = ctx.guild.me.voice.channel
+    #    members = self.bot.get_channel(channel.id).members
+    #    voice_channel = ctx.guild.me.voice.channel
+    #    print(channel.id)
+    #    return
 
 async def setup(bot):
     await bot.add_cog(Commander(bot))
