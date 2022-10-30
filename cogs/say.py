@@ -1,8 +1,7 @@
 import discord
 from discord.ext import commands
 from discord import FFmpegPCMAudio
-from functions import checkData
-from gtts import gTTS
+from functions import checkData, googleTTS
 from main import config
 
 class Speaker(commands.Cog):
@@ -37,9 +36,7 @@ class Speaker(commands.Cog):
         if "@" in arg:
             return await ctx.send("No me hagas mencionar a usuarios, por favor")
 
-        speech = gTTS(text = arg, lang = config['language'], slow = False)
-        speech.save("./files/audio.mp3")
-
+        googleTTS(message, config['language'])
         await ctx.invoke(self.bot.get_command('join'))
         return ctx.voice_client.play(FFmpegPCMAudio("./files/audio.mp3"))
 
