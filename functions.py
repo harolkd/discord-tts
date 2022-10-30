@@ -1,4 +1,5 @@
 import shutil, os
+from gtts import gTTS
 
 def checkData(message, autor, server):
     txt = open('files/data.txt', 'w')
@@ -18,3 +19,7 @@ def setupFiles():
     txt = open('files/data.txt', 'w')
     txt.write("Nobody")
     txt.close()
+
+def googleTTS(message, len):
+    speech = gTTS(text = arg, lang = len, slow = False)
+    speech.save("./files/audio.mp3")
