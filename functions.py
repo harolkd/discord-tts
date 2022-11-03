@@ -18,17 +18,18 @@ def setupFiles():
     #Clean Remaning Data
     if os.path.exists("files") == True:
         shutil.rmtree("files")
-    #Create new server files    
+    #Create new server files
     os.mkdir("files")
     txt = open('files/data.txt', 'w')
     txt.write("Nobody")
     txt.close()
 
-def googleTTS(message, len):
-    speech = gTTS(text = arg, lang = len, slow = False)
+def googleTTS(message, x):
+    speech = gTTS(text = arg, lang = x, slow = False)
     speech.save("./files/audio.mp3")
 
-def uberduck(message, voice):
+#requires token
+def uberduckTTS(message, voice):
     duck = ub.UberDuck(os.getenv('KEY'), os.getenv('SECRET'))
     sponge = duck.get_voice(voice, message)
 
