@@ -36,7 +36,7 @@ class Speaker(commands.Cog):
         if "@" in arg:
             return await ctx.send("No me hagas mencionar a usuarios, por favor")
 
-        googleTTS(message, config['language'])
+        googleTTS(arg, config['language'])
         await ctx.invoke(self.bot.get_command('join'))
         return ctx.voice_client.play(FFmpegPCMAudio("./files/audio.mp3"))
 
