@@ -24,7 +24,7 @@ class Speaker(commands.Cog):
             checkData(message, author, server)
         elif data == author:
             author = "()"
-            if "()" in arg:
+            if "()" in message:
                 checkData(message, author, server)
         elif data != author:
             checkData(message, author, server)
@@ -35,6 +35,7 @@ class Speaker(commands.Cog):
 
         if "@" in message:
             return await ctx.send("No me hagas mencionar a usuarios, por favor")
+        print(message)
 
         googleTTS(message, config['language'])
         await ctx.invoke(self.bot.get_command('join'))
