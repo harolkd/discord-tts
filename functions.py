@@ -25,7 +25,7 @@ def setupFiles():
     txt.close()
 
 def googleTTS(message, x):
-    speech = gTTS(text = arg, lang = x, slow = False)
+    speech = gTTS(text = message, lang = x, slow = False)
     speech.save("./files/audio.mp3")
 
 #requires token
