@@ -9,7 +9,7 @@ class Speaker(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def say(self, ctx, arg):
+    async def say(self, ctx, *, message):
         author = ctx.author.name
         server = ctx.guild.id
         #check if bot is talking
@@ -21,22 +21,22 @@ class Speaker(commands.Cog):
         txt.close
 
         if data == "Nobody":
-            checkData(arg, author, server)
+            checkData(message, author, server)
         elif data == author:
             author = "()"
             if "()" in arg:
-                checkData(arg, author, server)
+                checkData(message, author, server)
         elif data != author:
-            checkData(arg, author, server)
+            checkData(message, author, server)
 
         #anonimous message
-        if ("()" not in arg) or ("()" in author):
-            arg = "%s dice. %s" % (author, arg)
+        if ("()" not in message) or ("()" in author):
+            message = "%s dice. %s" % (author, message)
 
-        if "@" in arg:
+        if "@" in message:
             return await ctx.send("No me hagas mencionar a usuarios, por favor")
 
-        googleTTS(arg, config['language'])
+        googleTTS(message, config['language'])
         await ctx.invoke(self.bot.get_command('join'))
         return ctx.voice_client.play(FFmpegPCMAudio("./files/audio.mp3"))
 
