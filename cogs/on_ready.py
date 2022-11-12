@@ -1,6 +1,7 @@
 import discord
 from main import config
 from discord.ext import commands
+from functions import setupFiles
 
 class Starter(commands.Cog):
     def __init__(self, bot):
@@ -10,7 +11,9 @@ class Starter(commands.Cog):
     async def on_ready(self):
         activity = discord.Streaming(name=config['activity_name'], url=config['url'])
         await self.bot.change_presence(activity=activity)
-        return print(f'Bot is running')
+        print(f'Bot is running')
+
+        return setupFiles(self.bot)
 
 #    @commands.Cog.listener()
 #    async def on_voice_state_update(member, before, after):
