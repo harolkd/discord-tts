@@ -14,7 +14,7 @@ def checkData(message, autor, server):
     txt.close()
     return
 
-async def setupFiles(bot):
+def setupFiles(bot):
     #Clean Remaning Data
     if os.path.exists("files") == True:
         shutil.rmtree("files")
@@ -22,11 +22,14 @@ async def setupFiles(bot):
     os.mkdir("files")
 
     for guild in bot.guilds:
-        os.mkdir(f"files/{guild}")
-        txt = open('files/{guild}/data.txt', 'w')
+        os.mkdir(f"files/{guild.id}")
+        print(f"ready {guild}")
+
+    for guild in bot.guilds:
+        print(f"{guild.id}")
+        txt = open(f'files/{guild.id}/data.txt', 'w+')
         txt.write("Nobody")
         txt.close()
-    
     return
 
 def googleTTS(message, x):

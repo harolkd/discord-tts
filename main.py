@@ -18,11 +18,11 @@ async def load_extensions():
             await bot.load_extension(f"cogs.{filename[:-3]}")
 
 async def main():
-    await setupFiles(bot)
     await load_extensions()
     return
 
 if __name__ == "__main__":
     load_dotenv()
     asyncio.run(main())
+
     bot.run(os.getenv('TOKEN'))
