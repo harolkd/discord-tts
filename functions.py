@@ -14,15 +14,20 @@ def checkData(message, autor, server):
     txt.close()
     return
 
-def setupFiles():
+async def setupFiles(bot):
     #Clean Remaning Data
     if os.path.exists("files") == True:
         shutil.rmtree("files")
     #Create new server files
     os.mkdir("files")
-    txt = open('files/data.txt', 'w')
-    txt.write("Nobody")
-    txt.close()
+
+    for guild in bot.guilds:
+        os.mkdir(f"files/{guild}")
+        txt = open('files/{guild}/data.txt', 'w')
+        txt.write("Nobody")
+        txt.close()
+    
+    return
 
 def googleTTS(message, x):
     speech = gTTS(text = message, lang = x, slow = False)
