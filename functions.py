@@ -23,10 +23,8 @@ def setupFiles(bot):
 
     for guild in bot.guilds:
         os.mkdir(f"files/{guild.id}")
-        print(f"ready {guild}")
 
     for guild in bot.guilds:
-        print(f"{guild.id}")
         txt = open(f'files/{guild.id}/data.txt', 'w+')
         txt.write("Nobody")
         txt.close()
