@@ -9,20 +9,17 @@ class Uberduck(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def uberduck(self, ctx, arg1, arg2):
+    async def uberduck(self, ctx, arg1, *, message):
         server = ctx.guild.id
         #check if bot is talking
         if (ctx.voice_client is not None) and (ctx.voice_client.is_playing()):
             return await ctx.send("Espera a que termine de hablar")
 
-        if "@" in arg2:
+        if "@" in message:
             return await ctx.send("No me hagas mencionar a usuarios, por favor")
-        
-        print("Checks done")
-        uberduckTTS(arg2, arg1, server) #rick-sanchez
-        print("Uberduck file")
+
+        uberduckTTS(message, arg1, server) #rick-sanchez
         await ctx.invoke(self.bot.get_command('join'))
-        print("Playing audio")
         return ctx.voice_client.play(FFmpegPCMAudio(f"./files/{server}/audio.mp3"))
 
 async def setup(bot):
