@@ -23,26 +23,26 @@ def setupFiles(bot):
     #Create new server files
     os.mkdir("files")
 
-    for guild in bot.guilds:
-        os.mkdir(f"files/{guild.id}")
+    for server in bot.guilds:
+        os.mkdir(f"files/{server.id}")
 
-    for guild in bot.guilds:
-        txt = open(f'files/{guild.id}/data.txt', 'w+')
+    for server in bot.guilds:
+        txt = open(f'files/{server.id}/data.txt', 'w+')
         txt.write("Nobody")
         txt.close()
     return
 
-async def googleTTS(message, x, guild):
+async def googleTTS(message, x, server):
     speech = gTTS(text = message, lang = x, slow = False)
-    speech.save(f"./files/{guild}/audio.mp3")
+    speech.save(f"./files/{server}/audio.mp3")
 
 #requires token
-def uberduckTTS(message, voice):
+def uberduckTTS(message, voice, server):
     duck = ub.UberDuck(os.getenv('KEY'), os.getenv('SECRET'))
     sponge = duck.get_voice(voice, message)
 
     if sponge:
-        return sponge.save('./files/audio.mp3')
+        return sponge.save(f'./files/{server}/audio.mp3')
 
 #requires token
 def msTTS(message):
