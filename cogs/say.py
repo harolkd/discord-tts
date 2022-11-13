@@ -12,11 +12,12 @@ class Speaker(commands.Cog):
     async def say(self, ctx, *, message):
         author = ctx.author.name
         server = ctx.guild.id
+        print(server)
         #check if bot is talking
         if (ctx.voice_client is not None) and (ctx.voice_client.is_playing()):
             return await ctx.send("Espera a que termine de hablar")
 
-        txt = open('files/data.txt', 'r+')
+        txt = open(f'files/{server}/data.txt', 'r+')
         data = txt.read()
         txt.close
 
@@ -37,9 +38,9 @@ class Speaker(commands.Cog):
             return await ctx.send("No me hagas mencionar a usuarios, por favor")
         print(message)
 
-        googleTTS(message, config['language'])
+        await googleTTS(message, config['language'], server)
         await ctx.invoke(self.bot.get_command('join'))
-        return ctx.voice_client.play(FFmpegPCMAudio("./files/audio.mp3"))
+        return ctx.voice_client.play(FFmpegPCMAudio(f"./files/{server}/audio.mp3"))
 
 async def setup(bot):
     await bot.add_cog(Speaker(bot))
