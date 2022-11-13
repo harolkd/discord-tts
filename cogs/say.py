@@ -12,31 +12,24 @@ class Speaker(commands.Cog):
     async def say(self, ctx, *, message):
         author = ctx.author.name
         server = ctx.guild.id
-        print(server)
         #check if bot is talking
         if (ctx.voice_client is not None) and (ctx.voice_client.is_playing()):
             return await ctx.send("Espera a que termine de hablar")
+        #check data.txt
+        checkData(message, author, server)
 
         txt = open(f'files/{server}/data.txt', 'r+')
-        data = txt.read()
+        author = txt.read()
         txt.close
 
-        if data == "Nobody":
-            checkData(message, author, server)
-        elif data == author:
-            author = "()"
-            if "()" in message:
-                checkData(message, author, server)
-        elif data != author:
-            checkData(message, author, server)
-
         #anonimous message
-        if ("()" not in message) or ("()" in author):
+        if author == "()":
+            pass
+        else:
             message = "%s dice. %s" % (author, message)
 
         if "@" in message:
             return await ctx.send("No me hagas mencionar a usuarios, por favor")
-        print(message)
 
         await googleTTS(message, config['language'], server)
         await ctx.invoke(self.bot.get_command('join'))

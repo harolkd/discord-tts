@@ -5,12 +5,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def checkData(message, autor, server):
-    txt = open(f'files/{server}/data.txt', 'w')
-    if "()" in message:
-        txt.write(autor + "()")
+def checkData(message, author, server):
+    txt = open(f'files/{server}/data.txt', 'r+')
+    if ("()" in message) or (author == txt.read()):
+        txt = open(f'files/{server}/data.txt', 'w')
+        txt.write("()")
     else:
-        txt.write(autor)     
+        txt = open(f'files/{server}/data.txt', 'w')
+        txt.write(author)
     txt.close()
     return
 
