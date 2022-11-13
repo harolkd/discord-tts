@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def checkData(message, autor, server):
-    txt = open('files/data.txt', 'w')
+    txt = open(f'files/{server}/data.txt', 'w')
     if "()" in message:
         txt.write(autor + "()")
     else:
@@ -30,9 +30,9 @@ def setupFiles(bot):
         txt.close()
     return
 
-def googleTTS(message, x):
+async def googleTTS(message, x, guild):
     speech = gTTS(text = message, lang = x, slow = False)
-    speech.save("./files/audio.mp3")
+    speech.save(f"./files/{guild}/audio.mp3")
 
 #requires token
 def uberduckTTS(message, voice):
