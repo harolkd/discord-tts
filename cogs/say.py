@@ -14,7 +14,7 @@ class Speaker(commands.Cog):
         server = ctx.guild.id
         #check if bot is talking
         if (ctx.voice_client is not None) and (ctx.voice_client.is_playing()):
-            return await ctx.send(f'{language["say"]["error1"]}}')
+            return await ctx.send(f'{language["say"]["error1"]}')
         #check data.txt
         checkData(message, author, server)
 
