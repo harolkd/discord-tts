@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 config = json.load(open('config.json'))
-lang = json.load(open(f'/langs/{config["language"]}.json'))
+language = json.load(open(f'./langs/{config["language"]}.json'))
 
 def checkData(message, author, server):
     txt = open(f'files/{server}/data.txt', 'r+')
