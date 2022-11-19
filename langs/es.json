@@ -1,0 +1,11 @@
+{
+    "on_ready": "Bot Online",
+    "say": {
+        "error1": "Espera a que termine de hablar",
+        "error2": "No me hagas mencionar a usuarios, por favor",
+        "error3": "Debes estar en un canal de voz"
+    },
+    "uberduck": {
+        "error1": "Esa voz no la conozco"
+    }
+}
