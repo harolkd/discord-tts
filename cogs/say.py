@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from discord import FFmpegPCMAudio
-from functions import checkData, googleTTS
+from functions import checkData, googleTTS, language
 from main import config
 
 class Speaker(commands.Cog):
@@ -14,7 +14,7 @@ class Speaker(commands.Cog):
         server = ctx.guild.id
         #check if bot is talking
         if (ctx.voice_client is not None) and (ctx.voice_client.is_playing()):
-            return await ctx.send("Espera a que termine de hablar")
+            return await ctx.send(f'{language["say"]["error1"]}}')
         #check data.txt
         checkData(message, author, server)
 
@@ -29,7 +29,7 @@ class Speaker(commands.Cog):
             message = "%s dice. %s" % (author, message)
 
         if "@" in message:
-            return await ctx.send("No me hagas mencionar a usuarios, por favor")
+            return await ctx.send(f'{language["say"]["error2"]}')
 
         await googleTTS(message, config['language'], server)
         await ctx.invoke(self.bot.get_command('join'))

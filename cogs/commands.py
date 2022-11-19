@@ -1,5 +1,6 @@
 import discord, time
 from discord.ext import commands
+from functions import language
 
 class Commander(commands.Cog):
     def __init__(self, bot):
@@ -17,7 +18,7 @@ class Commander(commands.Cog):
                 await ctx.voice_client.move_to(channel)
             return
         else:
-            return await ctx.send("Debes estar en un canal")
+            return await ctx.send(f'{language["say"]["error1"]}')
 
     @commands.command()
     async def leave(self, ctx):
@@ -28,7 +29,7 @@ class Commander(commands.Cog):
             except:
                 pass
         else:
-            ctx.send("Tienes que estar en un canal de voz")
+            ctx.send(f'{language["say"]["error3"]}')
         return
 
     #@commands.command()
