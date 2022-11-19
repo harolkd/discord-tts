@@ -1,9 +1,12 @@
-import shutil, os
+import shutil, os, json
 import uberduckapi as ub
 from gtts import gTTS
 from dotenv import load_dotenv
 
 load_dotenv()
+
+config = json.load(open('config.json'))
+lang = json.load(open(f'/langs/{config["language"]}.json'))
 
 def checkData(message, author, server):
     txt = open(f'files/{server}/data.txt', 'r+')
@@ -38,7 +41,7 @@ async def googleTTS(message, x, server):
 
 #requires token
 def uberduckTTS(message, voice, server):
-    duck = ub.UberDuck(os.getenv('KEY'), os.getenv('SECRET'))
+    duck = ub.UberDuck(os.getenv('U_KEY'), os.getenv('U_SECRET'))
     sponge = duck.get_voice(voice, message)
 
     if sponge:
