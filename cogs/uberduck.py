@@ -13,10 +13,10 @@ class Uberduck(commands.Cog):
         server = ctx.guild.id
         #check if bot is talking
         if (ctx.voice_client is not None) and (ctx.voice_client.is_playing()):
-            return await ctx.send("Espera a que termine de hablar")
+            return await ctx.send(f'{language["say"]["error1"]}')
 
         if "@" in message:
-            return await ctx.send("No me hagas mencionar a usuarios, por favor")
+            return await ctx.send(f'{language["say"]["error2"]}')
 
         uberduckTTS(message, arg1, server) #rick-sanchez
         await ctx.invoke(self.bot.get_command('join'))
