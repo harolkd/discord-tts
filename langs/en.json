@@ -1,0 +1,11 @@
+{
+    "on_ready": "Bot Online",
+    "say": {
+        "error1": "Wait a minute, i'm talking",
+        "error2": "Don't mention users please",
+        "error3": "You must be in a voice channel"
+    },
+    "uberduck": {
+        "error1": "I dunno what are you talking about"
+    }
+}
