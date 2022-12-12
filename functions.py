@@ -47,7 +47,7 @@ def uberduckTTS(message, voice, server):
     if sponge:
         return sponge.save(f'./files/{server}/audio.mp3')
     else:
-        return f"{language["uberduck"]["error1"]}"
+        return language["uberduck"]["error1"]
 
 #requires token
 def msTTS(message):
