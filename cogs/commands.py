@@ -7,6 +7,12 @@ class Commander(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    async def language(self, arg, ctx):
+        with open("config.json", "r") as jsonFile:
+            i = json.load("config.json")
+        i["language"] = arg
+
+    @commands.command()
     async def join(self, ctx):
         if(ctx.author.voice):
             channel = ctx.author.voice.channel
