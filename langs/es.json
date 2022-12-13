@@ -1,5 +1,6 @@
 {
     "on_ready": "Bot Online",
+    "foobar": "Lenguaje Cambiado Exitosamente a: ",
     "say": {
         "error1": "Espera a que termine de hablar",
         "error2": "No me hagas mencionar a usuarios, por favor",
