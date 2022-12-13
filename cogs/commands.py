@@ -1,16 +1,19 @@
-import discord, time
+import discord, time, json
 from discord.ext import commands
-from functions import language
+from functions import language, config
 
 class Commander(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
-    async def language(self, arg, ctx):
-        with open("config.json", "r") as jsonFile:
-            i = json.load("config.json")
-        i["language"] = arg
+    async def language(self, ctx, arg):
+        config["language"] = arg
+                        
+        i = open("config.json", "w+")
+        i.write(json.dumps(config))
+        i.close()
+        return await ctx.send(f'{language["foobar"]} **{arg}**')
 
     @commands.command()
     async def join(self, ctx):

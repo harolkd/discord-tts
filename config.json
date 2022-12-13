@@ -1,7 +1,1 @@
-{
-  "prefix": "'",
-  "description": "A test bot",
-  "activity_name": "Pls Contribute <3",
-  "url": "https://github.com/bonzer75/discord-tts",
-  "language": "es"
-}
+{"prefix": "#", "description": "A test bot", "activity_name": "Pls Contribute <3", "url": "https://github.com/bonzer75/discord-tts", "language": "es"}

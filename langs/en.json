@@ -1,5 +1,6 @@
 {
     "on_ready": "Bot Online",
+    "foobar": "Language changed to: ",
     "say": {
         "error1": "Wait a minute, i'm talking",
         "error2": "Don't mention users please",
