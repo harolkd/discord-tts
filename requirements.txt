@@ -2,8 +2,6 @@ discord.py
 discord.py[voice]
 ffmpeg-python
 dnspython==1.16.0
-PyNaCl
-aiohttp
 async-timeout
 gTTS
 python-dotenv==0.14.0
