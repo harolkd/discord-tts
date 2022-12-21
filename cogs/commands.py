@@ -9,7 +9,7 @@ class Commander(commands.Cog):
     @commands.command()
     async def language(self, ctx, arg):
         config["language"] = arg
-                        
+
         i = open("config.json", "w+")
         i.write(json.dumps(config))
         i.close()
