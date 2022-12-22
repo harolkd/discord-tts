@@ -1,3 +1,5 @@
+**/Dockerfile.dev
+
 # flyctl launch added from .gitignore
 # env
 **/.env
