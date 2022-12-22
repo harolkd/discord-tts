@@ -1,3 +1,5 @@
+Dockerfile.dev
+
 # env
 .env
 fly.toml

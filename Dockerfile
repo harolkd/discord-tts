@@ -4,7 +4,7 @@ WORKDIR /home/app
 
 RUN apk add --no-cache --update python3 py3-pip ffmpeg
 COPY requirements.txt /home/app
-RUN python3 -m pip install -r requirements.txt --ignore-installed six
+RUN python3 -m pip install -r requirements.txt --ignore-installed
 
 COPY . /home/app
 
