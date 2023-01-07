@@ -41,14 +41,5 @@ class Commander(commands.Cog):
             ctx.send(f'{language["say"]["error3"]}')
         return
 
-    #@commands.command()
-    #async def foo(self, ctx):
-    #    server = ctx.guild.id
-    #    channel = ctx.guild.me.voice.channel
-    #    members = self.bot.get_channel(channel.id).members
-    #    voice_channel = ctx.guild.me.voice.channel
-    #    print(channel.id)
-    #    return
-
 async def setup(bot):
     await bot.add_cog(Commander(bot))

@@ -15,11 +15,5 @@ class Starter(commands.Cog):
 
         return setupFiles(self.bot)
 
-#    @commands.Cog.listener()
-#    async def on_voice_state_update(member, before, after):
-#        channel = self.bot.get_channel(862450695419461672)
-#        if before.channel is None and after.channel is not None:
-#                print("aa")
-
 async def setup(bot):
     await bot.add_cog(Starter(bot))
