@@ -1,4 +1,5 @@
 Dockerfile.dev
+.vs/
 
 # env
 .env

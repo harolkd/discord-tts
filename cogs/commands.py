@@ -1,4 +1,4 @@
-import discord, time, json
+import discord, time, json, os
 from discord.ext import commands
 from functions import language, config
 
@@ -17,14 +17,23 @@ class Commander(commands.Cog):
 
     @commands.command()
     async def join(self, ctx):
+
         if(ctx.author.voice):
             channel = ctx.author.voice.channel
             if channel == ctx.voice_client:
                 pass
             elif ctx.voice_client is None:
                 await channel.connect()
+
+                f = open("files/channel.txt", "w")
+                f.write(ctx.author.voice.channel.id)
+                f.close()
             else:
                 await ctx.voice_client.move_to(channel)
+
+                f = open("files/channel.txt", "w")
+                f.write(ctx.author.voice.channel.id)
+                f.close()
             return
         else:
             return await ctx.send(f'{language["say"]["error1"]}')
@@ -39,6 +48,7 @@ class Commander(commands.Cog):
                 pass
         else:
             ctx.send(f'{language["say"]["error3"]}')
+        os.remove("files/channel.txt") 
         return
 
 async def setup(bot):

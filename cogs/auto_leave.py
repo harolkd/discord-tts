@@ -8,11 +8,14 @@ class Voice(commands.Cog):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
-        print(f"{len(after.channel)} AFTER")
-        #print(f"{before.channel} BEFORE")
-        #if before.channel.id == "862450695419461672":
-        #    if len(before.channel.members) == 1:
-        #        await ctx.invoke(self.bot.get_command('leave'))
+
+        if path.exists("files/channel.txt"):
+            channel = self.bot.get_channel(862450695419461672)
+            if len(channel.members) < 2:
+                await ctx.voice_client.disconnect()
+            else:
+                pass
+        return
 
 async def setup(bot):
     await bot.add_cog(Voice(bot))
