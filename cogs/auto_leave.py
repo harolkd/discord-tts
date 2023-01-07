@@ -8,10 +8,11 @@ class Voice(commands.Cog):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
-        if before.channel:
-            if before.channel.name == "":
-                if len(before.channel.members) == 0:
-                    await ctx.invoke(self.bot.get_command('leave'))
+        print(f"{len(after.channel)} AFTER")
+        #print(f"{before.channel} BEFORE")
+        #if before.channel.id == "862450695419461672":
+        #    if len(before.channel.members) == 1:
+        #        await ctx.invoke(self.bot.get_command('leave'))
 
 async def setup(bot):
     await bot.add_cog(Voice(bot))
