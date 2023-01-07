@@ -11,7 +11,7 @@ class Commander(commands.Cog):
         config["language"] = arg
 
         i = open("config.json", "w+")
-        i.write(json.dumps(config))
+        i.write(json.dumps(config, indents=2))
         i.close()
         return await ctx.send(f'{language["foobar"]} **{arg}**')
 
