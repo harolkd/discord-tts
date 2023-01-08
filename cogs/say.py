@@ -20,7 +20,7 @@ class Speaker(commands.Cog):
 
         txt = open(f'files/{server}/data.txt', 'r+')
         author = txt.read()
-        txt.close
+        txt.close()
 
         #anonimous message
         if author == "()":

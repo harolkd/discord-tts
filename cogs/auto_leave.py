@@ -10,7 +10,11 @@ class Voice(commands.Cog):
     async def on_voice_state_update(self, member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
 
         if path.exists("files/channel.txt"):
-            channel = self.bot.get_channel(862450695419461672)
+            txt = open('files/channel.txt', 'r+')
+            beautifulID = txt.read()
+            txt.close()
+
+            channel = self.bot.get_channel(beautifulID)
             if len(channel.members) < 2:
                 await ctx.voice_client.disconnect()
             else:
