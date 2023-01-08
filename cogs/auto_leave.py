@@ -17,7 +17,8 @@ class Voice(commands.Cog):
             channel = self.bot.get_channel(beautyID)
             if len(channel.members) < 2:
                 print("TRUEEE")
-                await self.bot.leave_voice_channel()
+                for  i in self.bot.voice_clients:
+                    await i.disconnect()
             else:
                 pass
         return
