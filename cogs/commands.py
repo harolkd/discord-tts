@@ -26,13 +26,13 @@ class Commander(commands.Cog):
                 await channel.connect()
 
                 f = open("files/channel.txt", "w")
-                f.write(ctx.author.voice.channel.id)
+                f.write(f"{ctx.author.voice.channel.id}")
                 f.close()
             else:
                 await ctx.voice_client.move_to(channel)
 
                 f = open("files/channel.txt", "w")
-                f.write(ctx.author.voice.channel.id)
+                f.write(f"{ctx.author.voice.channel.id}")
                 f.close()
             return
         else:
