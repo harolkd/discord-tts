@@ -1,4 +1,4 @@
-import discord
+import discord, time
 from os import path
 from main import config
 from discord.ext import commands
@@ -9,6 +9,8 @@ class Voice(commands.Cog):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
+        time.sleep(5)
+
         if path.exists("files/channel.txt"):
             txt = open('files/channel.txt', 'r')
             beautyID = int(txt.read())
@@ -16,11 +18,10 @@ class Voice(commands.Cog):
 
             channel = self.bot.get_channel(beautyID)
             if len(channel.members) < 2:
-                print("TRUEEE")
-                for  i in self.bot.voice_clients:
-                    await i.disconnect()
-            else:
-                pass
+                try:
+                    await discord.utils.get(self.bot.voice_clients).disconnect()
+                except:
+                    pass
         return
 
 async def setup(bot):
