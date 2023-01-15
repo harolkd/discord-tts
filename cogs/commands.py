@@ -17,6 +17,7 @@ class Commander(commands.Cog):
 
     @commands.command()
     async def join(self, ctx):
+        server = ctx.guild.id
 
         if(ctx.author.voice):
             channel = ctx.author.voice.channel
@@ -25,13 +26,13 @@ class Commander(commands.Cog):
             elif ctx.voice_client is None:
                 await channel.connect()
 
-                f = open("files/channel.txt", "w")
+                f = open(f"files/{server}/channel.txt", "w")
                 f.write(f"{ctx.author.voice.channel.id}")
                 f.close()
             else:
                 await ctx.voice_client.move_to(channel)
 
-                f = open("files/channel.txt", "w")
+                f = open(f"files/{server}/channel.txt", "w")
                 f.write(f"{ctx.author.voice.channel.id}")
                 f.close()
             return
