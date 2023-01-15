@@ -8,7 +8,7 @@ class Voice(commands.Cog):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
-        #time.sleep(15)
+        time.sleep(15)
         
         for folder in os.listdir("./files"):
             if os.path.exists("files/{folder}/channel.txt"):
