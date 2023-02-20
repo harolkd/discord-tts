@@ -15,6 +15,8 @@ class Speaker(commands.Cog):
         #check if bot is talking
         if (ctx.voice_client is not None) and (ctx.voice_client.is_playing()):
             return await ctx.send(f'{language["say"]["error1"]}')
+
+        await ctx.invoke(self.bot.get_command('join'))
         #check data.txt
         checkData(message, author, server)
 
@@ -32,7 +34,6 @@ class Speaker(commands.Cog):
             return await ctx.send(f'{language["say"]["error2"]}')
 
         await googleTTS(message, config['language'], server)
-        await ctx.invoke(self.bot.get_command('join'))
         return ctx.voice_client.play(FFmpegPCMAudio(f"./files/{server}/audio.mp3"))
 
 async def setup(bot):

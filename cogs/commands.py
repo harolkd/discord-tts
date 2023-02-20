@@ -24,13 +24,15 @@ class General(commands.Cog):
             if channel == ctx.voice_client:
                 pass
             elif ctx.voice_client is None:
-                await channel.connect()
+                async with ctx.typing():
+                    await channel.connect()
 
                 f = open(f"files/{server}/channel.txt", "w")
                 f.write(f"{ctx.author.voice.channel.id}")
                 f.close()
             else:
-                await ctx.voice_client.move_to(channel)
+                async with ctx.typing():
+                    await ctx.voice_client.move_to(channel)
 
                 f = open(f"files/{server}/channel.txt", "w")
                 f.write(f"{ctx.author.voice.channel.id}")
