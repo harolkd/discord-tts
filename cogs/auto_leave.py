@@ -8,11 +8,9 @@ class Voice(commands.Cog):
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
-        time.sleep(15)
-        
         for folder in os.listdir("./files"):
-            if os.path.exists("files/{folder}/channel.txt"):
-                txt = open('files/{folder}/channel.txt', 'r')
+            if os.path.exists("./files/" + folder + "/channel.txt"):
+                txt = open("./files/" + folder + "/channel.txt", 'r')
                 beautyID = int(txt.read())
                 txt.close()
 

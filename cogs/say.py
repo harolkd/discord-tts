@@ -34,7 +34,13 @@ class Speaker(commands.Cog):
             return await ctx.send(f'{language["say"]["error2"]}')
 
         await googleTTS(message, config['language'], server)
-        return ctx.voice_client.play(FFmpegPCMAudio(f"./files/{server}/audio.mp3"))
+        
+        try:
+            ctx.voice_client.play(FFmpegPCMAudio(f"./files/{server}/audio.mp3"))
+        except:
+            ctx.send("Perdón :( soy una inútil)")
+
+        return
 
 async def setup(bot):
     await bot.add_cog(Speaker(bot))
