@@ -1,4 +1,5 @@
 import discord, os, shutil, json
+import http.server, threading
 from discord.ext import commands
 from discord import FFmpegPCMAudio
 from gtts import gTTS
@@ -14,6 +15,10 @@ intents.message_content = True
 config = json.load(open('config.json'))
 
 bot = commands.Bot(command_prefix=config['prefix'], description=config['description'], intents=intents)
+
+handler = http.server.SimpleHTTPRequestHandler(
+    http.server.HTTPServer.default_request_handlers, prefix=""
+)
 
 @bot.event
 async def on_ready():
@@ -101,4 +106,15 @@ async def leave(ctx):
         await ctx.send("Debes estar en un canal de voz")
 
 setupFiles()
+
+server = http.server.HTTPServer(("localhost", 8080), manejador)
+
+server_treath = threading.Thread(target=server.serve_forever)
+server_treath.daemon = True
+server_treath.start()
+
+print("Servidor HTTP iniciado en http://localhost:8080")
+
+server_treath.join()
+
 bot.run(os.getenv('TOKEN'))
