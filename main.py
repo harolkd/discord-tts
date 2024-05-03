@@ -1,5 +1,5 @@
-import discord, os, shutil, json
-import http.server, threading
+import discord, os, shutil, json, threading
+from flask import Flask
 from discord.ext import commands
 from discord import FFmpegPCMAudio
 from gtts import gTTS
@@ -16,9 +16,11 @@ config = json.load(open('config.json'))
 
 bot = commands.Bot(command_prefix=config['prefix'], description=config['description'], intents=intents)
 
-handler = http.server.SimpleHTTPRequestHandler(
-    http.server.HTTPServer.default_request_handlers, prefix=""
-)
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return "Prepared and Running"
 
 @bot.event
 async def on_ready():
@@ -105,16 +107,12 @@ async def leave(ctx):
     else:
         await ctx.send("Debes estar en un canal de voz")
 
+def start_bot():
+    bot.run(os.getenv('TOKEN'))
+
 setupFiles()
 
-server = http.server.HTTPServer(("localhost", 8080), manejador)
+threading.Thread(target=start_bot).start()
 
-server_treath = threading.Thread(target=server.serve_forever)
-server_treath.daemon = True
-server_treath.start()
+app.run(host='0.0.0.0', port=8080)
 
-print("Servidor HTTP iniciado en http://localhost:8080")
-
-server_treath.join()
-
-bot.run(os.getenv('TOKEN'))
